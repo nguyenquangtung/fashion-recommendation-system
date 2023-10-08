@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hiển thị ảnh</title>
+</head>
+<body>
+    <h1>Danh sách ảnh</h1>
+    {% for image in images %}
+    <img src="{{ image }}" alt="Hình ảnh">
+    {% endfor %}
+</body>
+</html>
