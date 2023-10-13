@@ -1,3 +1,6 @@
+from flask import Flask, request, render_template, jsonify
+import requests
+import os
 from flask import Flask, jsonify, request, send_file,  render_template
 import os
 from PIL import Image
@@ -56,59 +59,60 @@ def recommend(features, feature_list):
     return indices
 
 
-# steps
-
-# uploaded_file = st.file_uploader("Choose an image")
-# if uploaded_file is not None:
-#     if save_uploaded_file(uploaded_file):
-#         # display the file
-#         display_image = Image.open(uploaded_file)
-#         st.image(display_image)
-#         # feature extract
-#         features = feature_extraction(os.path.join(
-#             "uploads", uploaded_file.name), model)
-#         # st.text(features)
-#         # recommendention
-#         indices = recommend(features, feature_list)
-#         print(indices)
-#         # show
-#         col1, col2, col3, col4, col5 = st.columns(5)
-
-#         with col1:
-#             st.image(Image.open(filenames[indices[0][2]]))
-
-#         with col2:
-#             st.image(Image.open(filenames[indices[0][3]]))
-#         with col3:
-#             st.image(Image.open(filenames[indices[0][4]]))
-#         with col4:
-#             st.image(Image.open(filenames[indices[0][5]]))
-#         with col5:
-#             st.image(Image.open(filenames[indices[0][6]]))
-#     else:
-#         st.header("Some error occured in file upload")
-
-uploadImg = r'D:\workspace\Recommend_system\fashion-recommendation-system\testdata\1163.jpg'
-# feature extract
-# save_uploaded_file(uploadimg)
-features = feature_extraction(uploadImg, model)
-# st.text(features)
-# recommendention
-indices = recommend(features, feature_list)
-
 app = Flask(__name__)
+
+
+@app.route('/')
+def index():
+    return render_template('URLSubmit.html')
+
+
+@app.route('/download_image', methods=['POST'])
+def download_image():
+    # Lấy địa chỉ URL hình ảnh từ dữ liệu POST
+    image_url = request.form['url']
+
+    if image_url:
+        # Gửi yêu cầu HTTP để lấy hình ảnh
+        response = requests.get(image_url)
+
+        if response.status_code == 200:
+            # Tạo thư mục để lưu hình ảnh nếu nó chưa tồn tại
+            if not os.path.exists("downloaded_images"):
+                os.makedirs("downloaded_images")
+
+            # Tạo tên tệp cho hình ảnh đã tải
+            filename = os.path.join("downloaded_images", "image.jpg")
+
+            # Lưu hình ảnh xuống ổ đĩa
+            with open(filename, "wb") as file:
+                file.write(response.content)
+
+            return jsonify({"message": "Save successfully."})
+        else:
+            return jsonify({"error": "Yêu cầu tải hình ảnh không thành công."})
+
+    else:
+        return jsonify({"error": "URL hình ảnh không được cung cấp."})
 
 
 @app.route('/recommendResults', methods=['GET'])
 def recommendResults():
+    uploadImg = os.path.abspath(r'downloaded_images/image.jpg')
+    # feature extract
+    # save_uploaded_file(uploadimg)
+    features = feature_extraction(uploadImg, model)
+    # st.text(features)
+    # recommendention
+    indices = recommend(features, feature_list)
     result_images = []
     for i in range(1, 6):
         image_url = (filenames[indices[0][i]])
         result_images.append(image_url)
     return jsonify({"images": result_images})
     # # Trả về trang HTML với danh sách đường dẫn hình ảnh (chưa chạy đc)
-    # return render_template('fashion-recommendation-system\front-end\RecommendImages.html', images=result_images[0])
+    # return render_template('RecommendImages.html', images=result_images[0])
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8000)
+    app.run(debug=True)
