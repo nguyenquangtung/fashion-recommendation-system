@@ -24,7 +24,7 @@ print(model.summary())
 
 # %%
 img_path = (
-    r'D:\workspace/Recommend_system/fashion-recommendation-system/testdata')
+    r'fashion-recommendation-system\dataset')
 
 
 def extract_features(img_path, model):
