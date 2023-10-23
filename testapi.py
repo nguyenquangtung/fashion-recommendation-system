@@ -104,10 +104,6 @@ app = Flask(__name__)
 #     else:
 #         return jsonify({"error": "Image URL not provided."})
 
-
-product_name = "1-red"
-
-
 @app.route('/recommendResults', methods=['GET'])
 def recommendResults():
     # Lấy tên sản phẩm từ yêu cầu
