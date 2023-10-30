@@ -15,6 +15,7 @@ from sklearn.neighbors import NearestNeighbors
 from numpy.linalg import norm
 from keras.utils import load_img, img_to_array
 import mysql.connector
+from flask_cors import CORS
 
 # global variable
 feature_list = np.array(pickle.load(open('embeddings.pkl', 'rb')))
@@ -69,6 +70,7 @@ def recommend(features, feature_list):
 
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/recommendResults', methods=['POST'])
@@ -99,7 +101,7 @@ def recommendResults():
                     connection = mysql.connector.connect(**db_config)
                     if connection.is_connected():
                         cursor = connection.cursor()
-                        for i in range(1, 6):
+                        for i in range(2, 6):
                             image_url = (filenames[indices[0][i]])
                             file_name = os.path.basename(image_url)
                             parts = file_name.split('-')
@@ -131,13 +133,13 @@ def recommendResults():
                                         "image4": product[12],
                                         "overallRating": product[13]
                                     }
-                                    # list key ordered
-                                    key_order = ["id", "product_id", "name", "sellingPrice", "discount", "size",
-                                                 "color", "availableQuantity", "image1", "image2", "image3", "image4", "overallRating"]
-                                    # Sort data following key order
-                                    sorted_data = {
-                                        key: product_info[key] for key in key_order}
-                                    recommendResults.append(sorted_data)
+                                    # # list key ordered
+                                    # key_order = ["id", "product_id", "name", "sellingPrice", "discount", "size",
+                                    #              "color", "availableQuantity", "image1", "image2", "image3", "image4", "overallRating"]
+                                    # # Sort data following key order
+                                    # sorted_data = {
+                                    #     key: product_info[key] for key in key_order}
+                                    recommendResults.append(product_info)
                 except mysql.connector.Error as e:
                     print(f"Error: {e}")
                 finally:
@@ -156,7 +158,7 @@ def recommendResults():
                     response_data = {
                         "result": response_data["result"], "content": response_data["content"]}
                     # return jsonify({"""content""": recommendResults})
-                    print(response_data)
+                    # print(response_data)
                     return jsonify(response_data)
         except Exception as e:
             return jsonify({"error": "Invalid JSON format"})
