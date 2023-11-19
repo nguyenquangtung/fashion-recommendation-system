@@ -24,7 +24,7 @@ print(model.summary())
 
 # %%
 img_path = (
-    r'../fashion-recommendation-system\dataset')
+    r'../fashion-recommendation-system/dataset')
 
 
 def extract_features(img_path, model):
@@ -49,7 +49,7 @@ feature_list = []
 for file in tqdm(filenames):
     feature_list.append(extract_features(file, model))
 
-pickle.dump(feature_list, open('embeddings.pkl', 'wb'))
-pickle.dump(filenames, open('filenames.pkl', 'wb'))
+pickle.dump(feature_list, open('dataloader\\embeddings.pkl', 'wb'))
+pickle.dump(filenames, open('dataloader\\filenames.pkl', 'wb'))
 
 # %%
