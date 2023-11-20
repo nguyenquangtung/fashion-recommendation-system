@@ -1,9 +1,8 @@
 '''
 testing API with instance product
 '''
-from flask import Flask, request, render_template, jsonify
 import os
-from flask import Flask, jsonify, request, send_file,  render_template
+from flask import Flask, jsonify
 import numpy as np
 import pickle
 import tensorflow
