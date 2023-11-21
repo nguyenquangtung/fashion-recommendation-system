@@ -2,12 +2,12 @@
 Main for testing model on streamlit interface
 '''
 # %% Run test on Streamlit
-import streamlit as st
 import os
+import streamlit as st
+import tensorflow as tf
 from PIL import Image
 import numpy as np
 import pickle
-import tensorflow
 from keras.layers import GlobalMaxPooling2D
 from keras.applications import ResNet50
 from utils import func
@@ -16,14 +16,7 @@ from utils import func
 feature_list = np.array(pickle.load(open('.\\dataloader\\embeddings.pkl', 'rb')))
 filenames = pickle.load(open('.\\dataloader\\filenames.pkl', 'rb'))
 
-model = ResNet50(weights='imagenet', include_top=False,
-                 input_shape=(224, 224, 3))
-model.trainable = False
-
-model = tensorflow.keras.Sequential([
-    model,
-    GlobalMaxPooling2D()
-])
+model =tf.keras.models.load_model('.\\model\\model.h')
 
 st.title('Fashion Recommender System')
 

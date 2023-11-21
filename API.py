@@ -2,6 +2,7 @@
 API use for e-commerce services
 '''
 import os
+import tensorflow as tf
 from flask import Flask, jsonify, request
 import numpy as np
 import pickle
@@ -17,14 +18,7 @@ from utils import func
 feature_list = np.array(pickle.load(open('.\\dataloader\\embeddings.pkl', 'rb')))
 filenames = pickle.load(open('.\\dataloader\\filenames.pkl', 'rb'))
 
-model = ResNet50(weights='imagenet', include_top=False,
-                 input_shape=(224, 224, 3))
-model.trainable = False
-
-model = tensorflow.keras.Sequential([
-    model,
-    GlobalMaxPooling2D()
-])
+model =tf.keras.models.load_model('.\\model\\model.h')
 
 # database connection details
 DB = config.DBconfig()
@@ -58,7 +52,7 @@ def recommendResults():
                 recommendResults = []
                 try:
                     # Connect to the MySQL database
-                    connection = mysql.connector.connect(**DB.db_config)
+                    connection = mysql.connector.connect(**DB._db_config)
                     if connection.is_connected():
                         cursor = connection.cursor()
                         for i in range(2, 6):

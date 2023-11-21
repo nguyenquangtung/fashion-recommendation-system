@@ -9,7 +9,7 @@ DB = config.DBconfig()
 
 try:
     # Connect to the MySQL database
-    connection = mysql.connector.connect(**DB.db_config)
+    connection = mysql.connector.connect(**DB._db_config)
 
     if connection.is_connected():
         cursor = connection.cursor()

@@ -10,6 +10,6 @@ class DBconfig:
         "database": "fashionstorewebsite",
     }
 
-    @property
-    def db_config(self):
-        return self._db_config
+    # @property
+    # def db_config(self):
+    #     return self._db_config
