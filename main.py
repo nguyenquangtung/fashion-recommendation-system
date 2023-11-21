@@ -11,12 +11,15 @@ import pickle
 from keras.layers import GlobalMaxPooling2D
 from keras.applications import ResNet50
 from utils import func
+from model import fashion_model
+
 
 
 feature_list = np.array(pickle.load(open('.\\dataloader\\embeddings.pkl', 'rb')))
 filenames = pickle.load(open('.\\dataloader\\filenames.pkl', 'rb'))
 
-model =tf.keras.models.load_model('.\\model\\model.h')
+# model =tf.keras.models.load_model('.\\model\\model.h')
+model =fashion_model.FashionRecommendationModel().model
 
 st.title('Fashion Recommender System')
 

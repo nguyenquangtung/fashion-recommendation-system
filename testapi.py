@@ -7,15 +7,16 @@ from flask import Flask, jsonify
 import numpy as np
 import pickle
 import mysql.connector
-from configs import config
 from flask_cors import CORS
+from configs import config
+from model import fashion_model
 from utils import func
 
 # global variable
 feature_list = np.array(pickle.load(open('.\\dataloader\\embeddings.pkl', 'rb')))
 filenames = pickle.load(open('.\\dataloader\\filenames.pkl', 'rb'))
 
-model =tf.keras.models.load_model('.\\model\\model.h')
+model =fashion_model.FashionRecommendationModel().model
 
 # database connection details
 DB = config.DBconfig()

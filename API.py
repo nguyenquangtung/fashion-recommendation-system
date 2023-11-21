@@ -13,12 +13,15 @@ import mysql.connector
 from flask_cors import CORS
 from configs import config
 from utils import func
+from model import fashion_model
+
 
 # global variable
 feature_list = np.array(pickle.load(open('.\\dataloader\\embeddings.pkl', 'rb')))
 filenames = pickle.load(open('.\\dataloader\\filenames.pkl', 'rb'))
 
-model =tf.keras.models.load_model('.\\model\\model.h')
+model =fashion_model.FashionRecommendationModel().model
+
 
 # database connection details
 DB = config.DBconfig()
