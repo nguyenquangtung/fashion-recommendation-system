@@ -23,8 +23,6 @@ model =fashion_model.FashionRecommendationModel().model
 
 st.title('Fashion Recommender System')
 
-# steps
-
 uploaded_file = st.file_uploader("Choose an image")
 if uploaded_file is not None:
     if func.save_uploaded_file(uploaded_file):
