@@ -2,13 +2,9 @@
 API use for e-commerce services
 '''
 import os
-import tensorflow as tf
+import pickle
 from flask import Flask, jsonify, request
 import numpy as np
-import pickle
-import tensorflow
-from keras.layers import GlobalMaxPooling2D
-from keras.applications import ResNet50
 import mysql.connector
 from flask_cors import CORS
 from configs import config
