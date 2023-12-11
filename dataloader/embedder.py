@@ -1,6 +1,5 @@
 # %%
 import tensorflow
-from tensorflow import image
 from keras.layers import GlobalMaxPooling2D
 from keras.applications import ResNet50
 from keras.applications.resnet import preprocess_input

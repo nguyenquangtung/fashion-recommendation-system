@@ -4,12 +4,9 @@ Main for testing model on streamlit interface
 # %% Run test on Streamlit
 import os
 import streamlit as st
-import tensorflow as tf
 from PIL import Image
 import numpy as np
 import pickle
-from keras.layers import GlobalMaxPooling2D
-from keras.applications import ResNet50
 from utils import func
 from model import fashion_model
 

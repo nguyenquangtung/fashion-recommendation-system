@@ -2,7 +2,6 @@
 testing API with instance product
 '''
 import os
-import tensorflow as tf
 from flask import Flask, jsonify
 import numpy as np
 import pickle
