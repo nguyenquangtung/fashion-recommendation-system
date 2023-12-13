@@ -25,6 +25,11 @@ DB = config.DBconfig()
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/')
+def hello():
+    message = 'Hello, this is default page of API recommender system for Fashion Store'
+    return message
+
 
 @app.route('/recommendResults', methods=['POST'])
 def recommendResults():
