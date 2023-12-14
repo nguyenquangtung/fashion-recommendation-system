@@ -13,8 +13,8 @@ from model import fashion_model
 
 
 # global variable
-feature_list = np.array(pickle.load(open('.\\dataloader\\embeddings.pkl', 'rb')))
-filenames = pickle.load(open('.\\dataloader\\filenames.pkl', 'rb'))
+feature_list = np.array(pickle.load(open('dataloader\\embeddings.pkl', 'rb')))
+filenames = pickle.load(open('dataloader\\filenames.pkl', 'rb'))
 
 model =fashion_model.FashionRecommendationModel().model
 
@@ -116,4 +116,5 @@ def recommendResults():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # app.run(debug=True) #run on local host
+    app.run(host='0.0.0.0',port=5000)

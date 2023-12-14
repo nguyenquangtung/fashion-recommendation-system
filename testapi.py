@@ -12,8 +12,8 @@ from model import fashion_model
 from utils import func
 
 # global variable
-feature_list = np.array(pickle.load(open('.\\dataloader\\embeddings.pkl', 'rb')))
-filenames = pickle.load(open('.\\dataloader\\filenames.pkl', 'rb'))
+feature_list = np.array(pickle.load(open('dataloader\\embeddings.pkl', 'rb')))
+filenames = pickle.load(open('dataloader\\filenames.pkl', 'rb'))
 
 model =fashion_model.FashionRecommendationModel().model
 
