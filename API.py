@@ -91,6 +91,7 @@ def recommendResults():
                                         "overallRating": product[13]
                                     }
                                     recommendResults.append(product_info)
+                                    print("recommendResults::" + recommendResults)
                 except mysql.connector.Error as e:
                     print(f"Error: {e}")
                 finally:
