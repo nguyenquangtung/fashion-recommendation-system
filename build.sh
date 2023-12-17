@@ -1,1 +1,1 @@
-ssh root@14.225.254.87 'cd fashion-recommendation-system && git pull origin build && docker compose up -d --build && echo y | docker system prune -a'
+ssh root@14.225.254.87 'cd fashion-recommendation-system && git pull origin build && docker compose up -d --build'

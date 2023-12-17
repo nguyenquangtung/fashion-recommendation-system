@@ -1,0 +1,7 @@
+* Các bước để deploy
+B1. Merge và commit toàn bộ code vào nhánh main
+B2. Checkout sang nhánh build
+B3. Merge nhánh main vào nhánh build
+B4. Run lại source tại nhánh build xem thử có bị lỗi gì không, nếu có thì xoá nhánh build ở local và pull nhánh build từ remote về sau đó fix lỗi ở nhánh main
+B5. Nếu B4 run không có lỗi thì vào terminal (terminal đang đứng ở folder fashion-recommendation-system) và run lệnh sau: sh build.sh
+B6. Chờ một lúc thì terminal yêu cầu nhập password, nhập: Thisispassword123@
