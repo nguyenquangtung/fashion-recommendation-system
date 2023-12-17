@@ -54,15 +54,16 @@ def recommendResults():
 
                 # recommendention
                 indices = func.recommend(features, feature_list)
-                print("indices::" + indices)
                 recommendResults = []
                 try:
                     # Connect to the MySQL database
                     connection = mysql.connector.connect(**DB._db_config)
+                    print("Mysql connected")
                     if connection.is_connected():
                         cursor = connection.cursor()
                         for i in range(2, 6):
                             image_url = filenames[indices[0][i]]
+                            print("image_url:: " + image_url)
                             file_name = os.path.basename(image_url)
                             parts = file_name.split("-")
                             if len(parts) == 2:
