@@ -45,7 +45,8 @@ def recommendResults():
                 return jsonify({"error": "Missing product_name parameter"})
             else:
                 product_name_path = os.path.abspath(
-                    r'dataset/'+product_name+'.jpg')
+                    os.path.join("dataset", product_name + ".jpg")
+                )
                 # feature extract
                 # save_uploaded_file(uploadimg)
                 features = func.feature_extraction(product_name_path, model)
@@ -69,6 +70,8 @@ def recommendResults():
                                 id, fullpath = parts
                                 # Lấy phần trước dấu chấm
                                 color = fullpath.split(".")[0]
+                                if ('dataset\\' in id):
+                                    id = id.replace('dataset\\', '')
                                 print("id:: " + id)
                                 print("color:: " + color)
                                 # Truy vấn SQL SELECT để lấy các sản phẩm có ID và màu tương ứng
