@@ -13,8 +13,8 @@ from model import fashion_model
 
 
 # global variable
-feature_list = np.array(pickle.load(open('dataloader\\embeddings.pkl', 'rb')))
-filenames = pickle.load(open('dataloader\\filenames.pkl', 'rb'))
+feature_list = np.array(pickle.load(open('dataloader/embeddings.pkl', 'rb')))
+filenames = pickle.load(open('dataloader/filenames.pkl', 'rb'))
 
 model =fashion_model.FashionRecommendationModel().model
 
@@ -112,7 +112,7 @@ def recommendResults():
                     # print(response_data)
                     return jsonify(response_data)
         except Exception as e:
-            return jsonify({"error": "Invalid JSON format"})
+            return jsonify({"error": str(e)})
 
 
 if __name__ == '__main__':
