@@ -1,6 +1,6 @@
-'''
+"""
 Main for testing model on streamlit interface
-'''
+"""
 # %% Run test on Streamlit
 import os
 import streamlit as st
@@ -11,14 +11,13 @@ from utils import func
 from model import fashion_model
 
 
-
-feature_list = np.array(pickle.load(open('.\\dataloader\\embeddings.pkl', 'rb')))
-filenames = pickle.load(open('.\\dataloader\\filenames.pkl', 'rb'))
+feature_list = np.array(pickle.load(open("dataloader\\embeddings.pkl", "rb")))
+filenames = pickle.load(open("dataloader\\filenames.pkl", "rb"))
 
 # model =tf.keras.models.load_model('.\\model\\model.h')
-model =fashion_model.FashionRecommendationModel().model
+model = fashion_model.FashionRecommendationModel().model
 
-st.title('Fashion Recommender System')
+st.title("Fashion Recommender System")
 
 uploaded_file = st.file_uploader("Choose an image")
 if uploaded_file is not None:
@@ -27,8 +26,9 @@ if uploaded_file is not None:
         display_image = Image.open(uploaded_file)
         st.image(display_image)
         # feature extract
-        features = func.feature_extraction(os.path.join(
-            "uploads", uploaded_file.name), model)
+        features = func.feature_extraction(
+            os.path.join("uploads", uploaded_file.name), model
+        )
         # st.text(features)
         # recommendention
         indices = func.recommend(features, feature_list)
