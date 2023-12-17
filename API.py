@@ -54,6 +54,7 @@ def recommendResults():
 
                 # recommendention
                 indices = func.recommend(features, feature_list)
+                print(indices)
                 recommendResults = []
                 try:
                     # Connect to the MySQL database
