@@ -70,6 +70,8 @@ def recommendResults():
                                 id, fullpath = parts
                                 # Lấy phần trước dấu chấm
                                 color = fullpath.split(".")[0]
+                                print("id:: " + id)
+                                print("color:: " + color)
                                 # Truy vấn SQL SELECT để lấy các sản phẩm có ID và màu tương ứng
                                 cursor.execute(
                                     "SELECT id,product_id,name,selling_price,discount,brand,size,color,available_quantity,image_1,image_2,image_3,image_4,overall_rating FROM fashionstorewebsite.product_info_for_ui WHERE product_id = %s AND color = %s",
