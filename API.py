@@ -58,12 +58,10 @@ def recommendResults():
                 try:
                     # Connect to the MySQL database
                     connection = mysql.connector.connect(**DB._db_config)
-                    print("Mysql connected")
                     if connection.is_connected():
                         cursor = connection.cursor()
                         for i in range(2, 6):
                             image_url = filenames[indices[0][i]]
-                            print("image_url:: " + image_url)
                             file_name = os.path.basename(image_url)
                             parts = file_name.split("-")
                             if len(parts) == 2:
@@ -72,8 +70,6 @@ def recommendResults():
                                 color = fullpath.split(".")[0]
                                 if ('dataset\\' in id):
                                     id = id.split('\\')[1]
-                                print("id:: " + id)
-                                print("color:: " + color)
                                 # Truy vấn SQL SELECT để lấy các sản phẩm có ID và màu tương ứng
                                 cursor.execute(
                                     "SELECT id,product_id,name,selling_price,discount,brand,size,color,available_quantity,image_1,image_2,image_3,image_4,overall_rating FROM fashionstorewebsite.product_info_for_ui WHERE product_id = %s AND color = %s",
@@ -99,7 +95,6 @@ def recommendResults():
                                         "overallRating": product[13],
                                     }
                                     recommendResults.append(product_info)
-                                    print("recommendResults::" + str(recommendResults))
                 except mysql.connector.Error as e:
                     print(f"Error: {e}")
                 finally:
