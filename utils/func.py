@@ -1,6 +1,6 @@
-'''
+"""
 Common functions used
-'''
+"""
 
 from sklearn.neighbors import NearestNeighbors
 from keras.utils import load_img, img_to_array
@@ -9,9 +9,10 @@ from numpy.linalg import norm
 import numpy as np
 import os
 
+
 def save_uploaded_file(uploaded_file):
     try:
-        with open(os.path.join('uploads', uploaded_file.name), 'wb') as f:
+        with open(os.path.join("uploads", uploaded_file.name), "wb") as f:
             f.write(uploaded_file.getbuffer())
         return 1
     except:
@@ -30,8 +31,7 @@ def feature_extraction(img_path, model):
 
 
 def recommend(features, feature_list):
-    neighbors = NearestNeighbors(
-        n_neighbors=7, algorithm='brute', metric='euclidean')
+    neighbors = NearestNeighbors(n_neighbors=8, algorithm="brute", metric="euclidean")
     neighbors.fit(feature_list)
 
     distances, indices = neighbors.kneighbors([features])
