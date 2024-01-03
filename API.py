@@ -60,7 +60,7 @@ def recommendResults():
                     connection = mysql.connector.connect(**DB._db_config)
                     if connection.is_connected():
                         cursor = connection.cursor()
-                        for i in range(2, 6):
+                        for i in range(2, 7):
                             image_url = filenames[indices[0][i]]
                             file_name = os.path.basename(image_url)
                             parts = file_name.split("-")
