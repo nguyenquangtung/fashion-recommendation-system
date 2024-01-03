@@ -13,8 +13,8 @@ from model import fashion_model
 
 
 # global variable
-feature_list = np.array(pickle.load(open("dataloader\\embeddings.pkl", "rb")))
-filenames = pickle.load(open("dataloader\\filenames.pkl", "rb"))
+feature_list = np.array(pickle.load(open('dataloader/embeddings.pkl', 'rb')))
+filenames = pickle.load(open('dataloader/filenames.pkl', 'rb'))
 
 model = fashion_model.FashionRecommendationModel().model
 
@@ -68,6 +68,8 @@ def recommendResults():
                                 id, fullpath = parts
                                 # Lấy phần trước dấu chấm
                                 color = fullpath.split(".")[0]
+                                if ('dataset\\' in id):
+                                    id = id.split('\\')[1]
                                 # Truy vấn SQL SELECT để lấy các sản phẩm có ID và màu tương ứng
                                 cursor.execute(
                                     "SELECT id,product_id,name,selling_price,discount,brand,size,color,available_quantity,image_1,image_2,image_3,image_4,overall_rating FROM fashionstorewebsite.product_info_for_ui WHERE product_id = %s AND color = %s",
@@ -116,7 +118,7 @@ def recommendResults():
                     # print(response_data)
                     return jsonify(response_data)
         except Exception as e:
-            return jsonify({"error": "Invalid JSON format"})
+            return jsonify({"error": str(e)})
 
 
 if __name__ == "__main__":
